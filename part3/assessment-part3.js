@@ -13,7 +13,10 @@
 // return the result of your updateAnimal invocation
 
 // CODE HERE...
-
+function callBinding(magicAnimals,updateAnimal,id){
+updateAnimal.call(magicAnimals,id)
+return updateAnimal();
+}
 
 
 // *************
@@ -29,7 +32,10 @@
 
 // CODE HERE...
 
-
+function applyBinding(magicAnimals,updateAnimal,id){
+  updateAnimal.apply(id, magicAnimals)
+  return updateAnimal();
+}
 
 // *************
 // * PROBLEM 3 *
@@ -48,8 +54,14 @@
 var foo;
 
 // CODE HERE...
-
-
+function promiseMe($q){
+return $q(function(resolve) {
+    setTimeout(function() {
+      foo = 'bar';
+        resolve();
+    }, 200);
+});
+}
 
 // *************
 // * PROBLEM 4 *
@@ -64,3 +76,13 @@ var foo;
 // and then resolve the array as you complete your promise.
 
 // CODE HERE...
+
+function emailList($http,$q){
+  this.promise = function(){
+    var promise = $http({
+      method: "GET",
+      url: "/api/users"
+    });
+    return promise;
+  }
+}
